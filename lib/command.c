@@ -1650,7 +1650,7 @@ static int file_write_config(struct vty *vty)
 	struct vty *file_vty;
 	struct stat conf_stat;
 
-	if (host.noconfig)
+	// TODO if (host.noconfig)
 		return CMD_SUCCESS;
 
 	/* Check and see if we are operating under vtysh configuration */

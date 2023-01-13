@@ -697,7 +697,8 @@ void _zlog_assert_failed(const struct xref_assert *xref, const char *extra, ...)
 		     xref->expr);
 
 	/* abort() prints backtrace & memstats in SIGABRT handler */
-	abort();
+	//abort();
+	exit(-1);
 }
 
 int zlog_msg_prio(struct zlog_msg *msg)

@@ -259,6 +259,14 @@ int nb_cli_apply_changes(struct vty *vty, const char *xpath_base_fmt, ...)
 	if (xpath_base_fmt) {
 		va_list ap;
 
+		if (strchr(xpath_base_fmt, '%')) {
+			flog_warn(EC_LIB_YANG_DATA_CONVERT,
+					"%s: unsafe format string detected",
+					__func__);
+			vty_out(vty, "%% Unsafe format string detected.\n\n");
+			return CMD_ERR_NO_MATCH;
+		}
+
 		va_start(ap, xpath_base_fmt);
 		vsnprintf(xpath_base, sizeof(xpath_base), xpath_base_fmt, ap);
 		va_end(ap);
@@ -274,6 +282,14 @@ int nb_cli_apply_changes_clear_pending(struct vty *vty,
 	/* Parse the base XPath format string. */
 	if (xpath_base_fmt) {
 		va_list ap;
+
+		if (strchr(xpath_base_fmt, '%')) {
+			flog_warn(EC_LIB_YANG_DATA_CONVERT,
+					"%s: unsafe format string detected",
+					__func__);
+			vty_out(vty, "%% Unsafe format string detected.\n\n");
+			return CMD_ERR_NO_MATCH;
+		}
 
 		va_start(ap, xpath_base_fmt);
 		vsnprintf(xpath_base, sizeof(xpath_base), xpath_base_fmt, ap);

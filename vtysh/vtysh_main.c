@@ -513,6 +513,10 @@ int main(int argc, char **argv, char **env)
 		return (vtysh_mark_file(inputfile));
 	}
 
+#ifdef __AFL_HAVE_MANUAL_CONTROL
+  __AFL_INIT();
+#endif
+
 	/* Start execution only if not in dry-run mode */
 	if (dryrun && !cmd) {
 		if (inputfile) {

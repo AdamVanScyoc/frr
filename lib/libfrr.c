@@ -981,6 +981,7 @@ static void frr_config_read_in(struct thread *t)
 {
 	hook_call(frr_config_pre, master);
 
+	//if (!vty_read_config(vty_shared_candidate_config, "/tmp/test.conf", //di->config_file,
 	if (!vty_read_config(vty_shared_candidate_config, di->config_file,
 			     config_default)
 	    && di->backup_config_file) {
@@ -1032,14 +1033,21 @@ void frr_config_fork(void)
 				 &di->read_in);
 	}
 
+/*
+#ifdef __AFL_HAVE_MANUAL_CONTROL
+	__AFL_INIT();
+#endif
+*/
 	if (di->daemon_mode || di->terminal)
 		frr_daemonize();
 
 	frr_is_after_fork = true;
 
+/*
 	if (!di->pid_file)
 		di->pid_file = pidfile_default;
 	pid_output(di->pid_file);
+*/
 	zlog_tls_buffer_init();
 }
 

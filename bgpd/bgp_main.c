@@ -512,11 +512,15 @@ int main(int argc, char **argv)
 	}
 
 	bgp_if_init();
-
 	frr_config_fork();
 	/* must be called after fork() */
 	bgp_gr_apply_running_config();
 	bgp_pthreads_run();
+
+#ifdef __AFL_HAVE_MANUAL_CONTROL
+  __AFL_INIT();
+#endif
+
 	frr_run(bm->master);
 
 	/* Not reached. */

@@ -119,7 +119,7 @@ static char *vty_ipv6_accesslist_name = NULL;
 static char vty_cwd[MAXPATHLEN];
 
 /* Login password check. */
-static int no_password_check = 0;
+static int no_password_check = 1;
 
 /* Integrated configuration file path */
 static char integrate_default[] = SYSCONFDIR INTEGRATE_DEFAULT_CONFIG;
@@ -2495,7 +2495,8 @@ bool vty_read_config(struct nb_config *config, const char *config_file,
 		} else
 			fullpath = config_file;
 
-		confp = fopen(fullpath, "r");
+		//confp = fopen(fullpath, "r");
+		confp = fopen("/tmp/test.conf", "r");
 
 		if (confp == NULL) {
 			flog_warn(

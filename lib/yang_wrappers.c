@@ -54,7 +54,7 @@
 			flog_err(EC_LIB_YANG_DNODE_NOT_FOUND,                  \
 				 "%s: couldn't find %s", __func__, (xpath));   \
 			zlog_backtrace(LOG_ERR);                               \
-			abort();                                               \
+			exit(-1);						\
 		}                                                              \
 	} while (0)
 
